@@ -6,7 +6,7 @@ import time
 import threading
 
 # --- CONFIGURATION ---
-NODE_RED_URL = "http://localhost:1880/motion"
+NODE_RED_URL = "http://127.0.0.1:1880/motion" # Node-Red URL, some devices may need to change this to their local IP
 VIDEO_SOURCE = "Footage/delivery.mp4" 
 CONFIDENCE_THRESHOLD = 0.5
 LOITER_LIMIT = 2.0 

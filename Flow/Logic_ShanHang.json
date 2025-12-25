@@ -1,0 +1,1082 @@
+[
+    {
+        "id": "b845fb6298a4e637",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "315fa5d3454b375d",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "f5709bdbfaba1c02",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "none",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true,
+        "allowInstall": false
+    },
+    {
+        "id": "9f4dde8aa735ac76",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#815da2",
+            "primary": "#ffa200",
+            "bgPage": "#f4dff7",
+            "groupBg": "#ffffff",
+            "groupOutline": "#ffd500"
+        },
+        "sizes": {
+            "density": "comfortable",
+            "pagePadding": "24px",
+            "groupGap": "12px",
+            "groupBorderRadius": "12px",
+            "widgetGap": "4px"
+        }
+    },
+    {
+        "id": "195bb746fcc62daf",
+        "type": "ui-page",
+        "name": "House Security System",
+        "ui": "f5709bdbfaba1c02",
+        "path": "/HSS",
+        "icon": "",
+        "layout": "grid",
+        "theme": "9f4dde8aa735ac76",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "1"
+            },
+            {
+                "name": "Tablet",
+                "px": "1",
+                "cols": "1"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "1",
+                "cols": "1"
+            },
+            {
+                "name": "Desktop",
+                "px": "1",
+                "cols": "1"
+            }
+        ],
+        "order": 1,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "756c5cb894241b1f",
+        "type": "ui-group",
+        "name": "Security Control",
+        "page": "195bb746fcc62daf",
+        "width": "7",
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "1ec607290d5c2bd7",
+        "type": "ui-group",
+        "name": "Activity History",
+        "page": "195bb746fcc62daf",
+        "width": "7",
+        "height": 1,
+        "order": 2,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "75b76992942e37da",
+        "type": "http in",
+        "z": "b845fb6298a4e637",
+        "name": "Get detection from python script",
+        "url": "/motion",
+        "method": "post",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 530,
+        "y": 620,
+        "wires": [
+            [
+                "93f7ae9a38bf3346"
+            ]
+        ]
+    },
+    {
+        "id": "93f7ae9a38bf3346",
+        "type": "function",
+        "z": "b845fb6298a4e637",
+        "name": "Process motion detection message",
+        "func": "let p = msg.payload;\n\nmsg.payload = {\n    status: p.status,\n    message: (p.msg)\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 620,
+        "wires": [
+            [
+                "6048c4c6f416552d",
+                "84cb7090004f6457",
+                "gatekeeper_node"
+            ]
+        ]
+    },
+    {
+        "id": "6048c4c6f416552d",
+        "type": "debug",
+        "z": "b845fb6298a4e637",
+        "name": "Show detection result",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1140,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "84cb7090004f6457",
+        "type": "http response",
+        "z": "b845fb6298a4e637",
+        "name": "HTTPS respond node",
+        "statusCode": "",
+        "headers": {},
+        "x": 1080,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "e3ac4e6976d7a5c0",
+        "type": "exec",
+        "z": "b845fb6298a4e637",
+        "command": "cmd /c start \"\" /min powershell -c \"(New-Object Media.SoundPlayer 'C:\\Users\\Admin\\OneDrive\\Desktop\\A_Y3S1\\CPT316\\NodeRed_Code\\House-Security-System-Node-RED\\Footage\\Alarm.wav').PlaySync();\"",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "2",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Alarm",
+        "x": 1790,
+        "y": 160,
+        "wires": [
+            [],
+            [
+                "3e9b8f4b2659919c"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "3e9b8f4b2659919c",
+        "type": "debug",
+        "z": "b845fb6298a4e637",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2160,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "6bac944d7b136519",
+        "type": "switch",
+        "z": "b845fb6298a4e637",
+        "name": "CRITICAL Mode",
+        "property": "payload.status",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "CRITICAL Mode",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1420,
+        "y": 260,
+        "wires": [
+            [
+                "e3ac4e6976d7a5c0",
+                "a72d16252fcba37a",
+                "a1d416e44d2cc7af",
+                "42f39e1910baadce"
+            ]
+        ]
+    },
+    {
+        "id": "689959e7aef47539",
+        "type": "switch",
+        "z": "b845fb6298a4e637",
+        "name": "SAFE Mode",
+        "property": "payload.status",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "SAFE Mode",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1390,
+        "y": 1060,
+        "wires": [
+            [
+                "ddc9a26717c4ea42",
+                "7d1f26acf191d3b7",
+                "42f39e1910baadce"
+            ]
+        ]
+    },
+    {
+        "id": "7a8f3ad44e69e017",
+        "type": "switch",
+        "z": "b845fb6298a4e637",
+        "name": "ALERT Mode",
+        "property": "payload.status",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "ALERT Mode",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1410,
+        "y": 620,
+        "wires": [
+            [
+                "ab33ddafe13d79e1",
+                "3f3c11b1e0a4feea",
+                "42f39e1910baadce"
+            ]
+        ]
+    },
+    {
+        "id": "ab33ddafe13d79e1",
+        "type": "exec",
+        "z": "b845fb6298a4e637",
+        "command": "powershell -WindowStyle Hidden -Command \"Add-Type -AssemblyName System.Speech; (New-Object System.Speech.Synthesis.SpeechSynthesizer).Speak('Warning. Intruder detected. Please leave immediately.')\"",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "true",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Audio: Intruder Warning featuring AI Generated Voice",
+        "x": 1900,
+        "y": 620,
+        "wires": [
+            [],
+            [
+                "27add97ead2c7dcc"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "27add97ead2c7dcc",
+        "type": "debug",
+        "z": "b845fb6298a4e637",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2360,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "a72d16252fcba37a",
+        "type": "function",
+        "z": "b845fb6298a4e637",
+        "name": "Messenger",
+        "func": "// CONFIGURATION\nvar apikey = \"Moaq8SlWi1vfhUjd\"; \n\n// FIX: Use .message (based on your debug output) OR .msg as a backup\nvar textToSend = (msg.payload.message || \"Security Update\");\n\n// Encode text\nvar encodedMessage = encodeURIComponent(textToSend);\n\n// Construct URL\nmsg.url = \"https://api.callmebot.com/facebook/send.php?source=node-red&apikey=\" + apikey + \"&text=\" + encodedMessage;\n\nmsg.payload = {};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1810,
+        "y": 260,
+        "wires": [
+            [
+                "fa2930afa5fe4ce3"
+            ]
+        ]
+    },
+    {
+        "id": "d0702dd7bf23cf76",
+        "type": "debug",
+        "z": "b845fb6298a4e637",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2580,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "6fa1e1e4217b1729",
+        "type": "http request",
+        "z": "b845fb6298a4e637",
+        "name": "Send msg to Messenger",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 2330,
+        "y": 260,
+        "wires": [
+            [
+                "d0702dd7bf23cf76"
+            ]
+        ]
+    },
+    {
+        "id": "fa2930afa5fe4ce3",
+        "type": "delay",
+        "z": "b845fb6298a4e637",
+        "name": "Delay (1 msg / 20 sec)",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "20",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2060,
+        "y": 260,
+        "wires": [
+            [
+                "6fa1e1e4217b1729"
+            ]
+        ]
+    },
+    {
+        "id": "ddc9a26717c4ea42",
+        "type": "function",
+        "z": "b845fb6298a4e637",
+        "name": "Messenger",
+        "func": "// CONFIGURATION\nvar apikey = \"Moaq8SlWi1vfhUjd\"; \n\n// FIX: Use .message (based on your debug output) OR .msg as a backup\nvar textToSend = (msg.payload.message || \"Security Update\");\n\n// Encode text\nvar encodedMessage = encodeURIComponent(textToSend);\n\n// Construct URL\nmsg.url = \"https://api.callmebot.com/facebook/send.php?source=node-red&apikey=\" + apikey + \"&text=\" + encodedMessage;\n\nmsg.payload = {};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1770,
+        "y": 980,
+        "wires": [
+            [
+                "21272315e019bf93"
+            ]
+        ]
+    },
+    {
+        "id": "74e4ddfe534b59a2",
+        "type": "debug",
+        "z": "b845fb6298a4e637",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2540,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "d2f329eabd97eac8",
+        "type": "http request",
+        "z": "b845fb6298a4e637",
+        "name": "Send msg to Messenger",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 2290,
+        "y": 980,
+        "wires": [
+            [
+                "74e4ddfe534b59a2"
+            ]
+        ]
+    },
+    {
+        "id": "21272315e019bf93",
+        "type": "delay",
+        "z": "b845fb6298a4e637",
+        "name": "Delay (1 msg / 20 sec)",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "20",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2020,
+        "y": 980,
+        "wires": [
+            [
+                "d2f329eabd97eac8"
+            ]
+        ]
+    },
+    {
+        "id": "0bfc86611ae8a5c2",
+        "type": "ui-led",
+        "z": "b845fb6298a4e637",
+        "name": "Light State",
+        "group": "756c5cb894241b1f",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "label": "House Outdoor Light",
+        "labelPlacement": "left",
+        "labelAlignment": "flex-start",
+        "states": [
+            {
+                "value": "true",
+                "valueType": "bool",
+                "color": "#ff0000"
+            },
+            {
+                "value": "false",
+                "valueType": "bool",
+                "color": "#38ff38"
+            },
+            {
+                "value": "yellow",
+                "valueType": "str",
+                "color": "#e2fe58"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showBorder": false,
+        "showGlow": true,
+        "x": 2330,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "a1d416e44d2cc7af",
+        "type": "change",
+        "z": "b845fb6298a4e637",
+        "name": "Set Red Light",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1940,
+        "y": 380,
+        "wires": [
+            [
+                "0bfc86611ae8a5c2"
+            ]
+        ]
+    },
+    {
+        "id": "7d1f26acf191d3b7",
+        "type": "change",
+        "z": "b845fb6298a4e637",
+        "name": "Set Green Light",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1780,
+        "y": 1060,
+        "wires": [
+            [
+                "0bfc86611ae8a5c2"
+            ]
+        ]
+    },
+    {
+        "id": "scheduler_logic",
+        "type": "function",
+        "z": "b845fb6298a4e637",
+        "name": "Time Check (12am and 8am)",
+        "func": "let now = new Date();\nlet hour = now.getHours();\nlet minute = now.getMinutes();\n\n// Turn On System automatically at 12am\nif (hour === 0 && minute === 0) {\n    msg.payload = true;\n    return msg;\n}\n // Turn OFf System automatically at 8am\nif (hour === 8 && minute === 0) {\n    msg.payload = false;\n    return msg;\n}\n\n// No switch automation when its not 12am or 8am exactly\nreturn null;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1160,
+        "y": 1480,
+        "wires": [
+            [
+                "e4261eadc3eed6ef"
+            ]
+        ]
+    },
+    {
+        "id": "gatekeeper_node",
+        "type": "function",
+        "z": "b845fb6298a4e637",
+        "name": "Gatekeeper: Is System Armed?",
+        "func": "// Get switch state from flow\nlet isArmed = flow.get('systemArmed');\n\n// Check switch state\nif (isArmed === true) {\n    node.status({fill:\"green\", shape:\"dot\", text:\"System ARMED - Data Passing\"});\n    return msg;\n} \nelse if (isArmed === false) {\n    node.status({fill:\"red\", shape:\"ring\", text:\"System DISARMED - Data Blocked\"});\n    return null;\n} \nelse {\n    // This handles the first time the system runs before the switch is clicked\n    node.status({fill:\"yellow\", shape:\"dot\", text:\"State Unknown - Blocking for safety\"});\n    return null;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1150,
+        "y": 620,
+        "wires": [
+            [
+                "689959e7aef47539",
+                "7a8f3ad44e69e017",
+                "6bac944d7b136519"
+            ]
+        ]
+    },
+    {
+        "id": "set_global_state",
+        "type": "change",
+        "z": "b845fb6298a4e637",
+        "name": "Store Armed State",
+        "rules": [
+            {
+                "t": "set",
+                "p": "systemArmed",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "x": 1650,
+        "y": 1540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8b489b5daba03346",
+        "type": "inject",
+        "z": "b845fb6298a4e637",
+        "name": "Auto Switch",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "30",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 870,
+        "y": 1540,
+        "wires": [
+            [
+                "scheduler_logic"
+            ]
+        ]
+    },
+    {
+        "id": "e4261eadc3eed6ef",
+        "type": "ui-switch",
+        "z": "b845fb6298a4e637",
+        "name": "System Switch",
+        "label": "System Switch",
+        "group": "756c5cb894241b1f",
+        "order": 2,
+        "width": "0",
+        "height": "0",
+        "passthru": true,
+        "decouple": false,
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "className": "",
+        "layout": "row-spread",
+        "clickableArea": "line",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 1420,
+        "y": 1420,
+        "wires": [
+            [
+                "set_global_state",
+                "f75f760bb1e4647a"
+            ]
+        ]
+    },
+    {
+        "id": "f75f760bb1e4647a",
+        "type": "switch",
+        "z": "b845fb6298a4e637",
+        "name": "Switch State",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "true",
+                "vt": "jsonata"
+            },
+            {
+                "t": "eq",
+                "v": "false",
+                "vt": "jsonata"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1650,
+        "y": 1260,
+        "wires": [
+            [
+                "126207ae27d74e72"
+            ],
+            [
+                "cb414ac41ab0f075"
+            ]
+        ]
+    },
+    {
+        "id": "126207ae27d74e72",
+        "type": "change",
+        "z": "b845fb6298a4e637",
+        "name": "Set ON (Light is green color by default)",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "false",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1950,
+        "y": 1200,
+        "wires": [
+            [
+                "0bfc86611ae8a5c2"
+            ]
+        ]
+    },
+    {
+        "id": "cb414ac41ab0f075",
+        "type": "change",
+        "z": "b845fb6298a4e637",
+        "name": "Set OFF (Light dims)",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "null",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1900,
+        "y": 1320,
+        "wires": [
+            [
+                "0bfc86611ae8a5c2"
+            ]
+        ]
+    },
+    {
+        "id": "3f3c11b1e0a4feea",
+        "type": "change",
+        "z": "b845fb6298a4e637",
+        "name": "Set Yellow Light",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "yellow",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1940,
+        "y": 500,
+        "wires": [
+            [
+                "0bfc86611ae8a5c2"
+            ]
+        ]
+    },
+    {
+        "id": "95defb3c6084b00f",
+        "type": "function",
+        "z": "b845fb6298a4e637",
+        "name": "Light and Switch Initial State (Loading Up Dashboard)",
+        "func": "let now = new Date();\nlet hour = now.getHours();\n\n// Check whether time when starting node-red on cmd is in between 12am to 8am or not\nlet isMidnight = (hour >= 0 && hour < 8); \n\nmsg.payload = isMidnight;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1100,
+        "y": 1300,
+        "wires": [
+            [
+                "e4261eadc3eed6ef"
+            ]
+        ]
+    },
+    {
+        "id": "bef56c8d2b3b0822",
+        "type": "inject",
+        "z": "b845fb6298a4e637",
+        "name": "Auto Switch (Loading Up Dashboard)",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 690,
+        "y": 1180,
+        "wires": [
+            [
+                "95defb3c6084b00f"
+            ]
+        ]
+    },
+    {
+        "id": "42f39e1910baadce",
+        "type": "function",
+        "z": "b845fb6298a4e637",
+        "name": "Table Formatter",
+        "func": "let now = new Date();\nlet date = now.toLocaleDateString();\nlet time = now.toLocaleTimeString();\n\n// Get msg from python script\nlet eventDesc = msg.payload.message || \"Movement Detected\";\nlet status = msg.payload.status || \"Unknown\";\n\nlet newEntry = {\n    description: eventDesc,\n    date: date,   \n    start: time,\n    status: status\n};\n\n// History Management\nlet history = global.get(\"securityHistory\") || [];\nhistory.unshift(newEntry);\n\n// Only save and display the last 100 events\nif (history.length > 100) { history.pop(); }\nglobal.set(\"securityHistory\", history);\n\nmsg.payload = history;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1660,
+        "y": 780,
+        "wires": [
+            [
+                "5a7c42c843c5258e"
+            ]
+        ]
+    },
+    {
+        "id": "5a7c42c843c5258e",
+        "type": "ui-template",
+        "z": "b845fb6298a4e637",
+        "group": "1ec607290d5c2bd7",
+        "page": "",
+        "ui": "",
+        "name": "Activitiy Log Table",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "head": "",
+        "format": "<div style=\"background: white; padding: 10px; border-radius: 8px; border: 1px solid #ddd; color: #333; min-width: 500px; width: 100%;\">\n    <div style=\"max-height: 600px; overflow-y: auto; overflow-x: hidden; border-bottom: 1px solid #eee;\">\n        <table style=\"width: 100%; border-collapse: collapse;\">\n            <thead style=\"position: sticky; top: 0; background: #f4f4f4; z-index: 1;\">\n                <tr style=\"text-align: left;\">\n                    <th style=\"padding: 15px; font-size: 1.1em; width: 40%;\">Event</th>\n                    <th style=\"padding: 7px; font-size: 1.1em;\">Date</th>\n                    <th style=\"padding: 7px; font-size: 1.1em;\">Time</th>\n                    <th style=\"padding: 10px; font-size: 1.1em;\">Status</th>\n                    <th style=\"padding: 7px;\"></th>\n                </tr>\n            </thead>\n            <tbody>\n                <tr v-for=\"(row, index) in msg.payload\" :key=\"index\" style=\"border-bottom: 1px solid #eee;\">\n                    <td style=\"padding: 15px; font-size: 1.1em;\">{{ row.description }}</td>\n                    <td style=\"padding: 10px; font-size: 1.1em; white-space: nowrap;\">{{ row.date }}</td>\n                    <td style=\"padding: 10px; font-size: 1.1em; white-space: nowrap;\">{{ row.start }}</td>\n                    <td style=\"padding: 6px;\">\n                        <span :style=\"{\n                            color: row.status.includes('CRITICAL') ? 'red' : \n                                   (row.status.includes('ALERT') ? 'orange' : 'green'),\n                            fontWeight: 'bold',\n                            fontSize: '1.1em'\n                        }\">\n                            {{ row.status }}\n                        </span>\n                    </td>\n                    <td style=\"padding: 6px; text-align: center;\">\n                        <button @click=\"send({payload: index, action: 'delete_row'})\" \n                                style=\"background: #ffeded; border: 1px solid #ffbcbc; color: #d11a2a; border-radius: 8px; cursor: pointer; padding: 8px 12px; font-weight: bold;\">\n                            Delete\n                        </button>\n                    </td>\n                </tr>\n            </tbody>\n        </table>\n    </div>\n    \n    <div style=\"margin-top: 15px; display: flex; justify-content: space-between; align-items: center;\">\n        <div style=\"font-size: 1.1em; color: #666;\">\n            Total Events: {{ msg.payload ? msg.payload.length : 0 }} / 100\n        </div>\n        \n        <div style=\"display: flex; gap: 10px;\">\n            <button @click=\"downloadHistory\" \n                    style=\"background: #4CAF50; color: white; border: none; border-radius: 8px; cursor: pointer; padding: 12px 20px; font-weight: bold;\">\n                Export CSV\n            </button>\n\n            <button @click=\"send({action: 'clear_all_logs'})\" \n                    style=\"background: #d11a2a; color: white; border: none; border-radius: 8px; cursor: pointer; padding: 12px 20px; font-weight: bold;\">\n                Clear All\n            </button>\n        </div>\n    </div>\n</div>\n\n<script>\n    export default {\n        methods: {\n            downloadHistory() {\n                const data = this.msg.payload;\n                if (!data || data.length === 0) {\n                    alert(\"No history to export\");\n                    return;\n                }\n                \n                let csv = \"Date,Time,Event,Status\\n\";\n                data.forEach(r => {\n                    // Clean descriptions of any quotes to prevent CSV breaking\n                    const cleanDesc = r.description.replace(/\"/g, '\"\"');\n                    csv += `\"${r.date}\",\"${r.start}\",\"${cleanDesc}\",\"${r.status}\"\\n`;\n                });\n\n                const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });\n                const url = window.URL.createObjectURL(blob);\n                const link = document.createElement('a');\n                link.href = url;\n                link.setAttribute('download', `security_history_${new Date().toLocaleDateString().replace(/\\//g, '-')}.csv`);\n                document.body.appendChild(link);\n                link.click();\n                document.body.removeChild(link);\n                window.URL.revokeObjectURL(url);\n            }\n        }\n    }\n</script>",
+        "storeOutMessages": true,
+        "passthru": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 1890,
+        "y": 700,
+        "wires": [
+            [
+                "687466f093decb1d"
+            ]
+        ]
+    },
+    {
+        "id": "687466f093decb1d",
+        "type": "function",
+        "z": "b845fb6298a4e637",
+        "name": "Delete Single or All History",
+        "func": "// Get current security history\nlet history = global.get(\"securityHistory\") || [];\n\n// Delete single row\nif (msg.action === \"delete_row\") {\n    let indexToRemove = parseInt(msg.payload);\n    if (!isNaN(indexToRemove) && indexToRemove >= 0 && indexToRemove < history.length) {\n        history.splice(indexToRemove, 1);\n        global.set(\"securityHistory\", history);\n        msg.payload = history;\n        return msg;\n    }\n}\n\n// Clear All History\nelse if (msg.action === \"clear_all_logs\") {\n    history = [];\n    global.set(\"securityHistory\", history);\n\n    // Clear payload to prevent \"pass-through\"\n    msg.payload = [];\n    delete msg.action;\n    return msg;\n}\n\n// Incoming New Events from python\nif (msg.action === undefined) {\n    // Get the latest history log after some deletion\n    msg.payload = history;\n    return msg;\n}\n\nreturn null; ",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1800,
+        "y": 880,
+        "wires": [
+            [
+                "5a7c42c843c5258e"
+            ]
+        ]
+    },
+    {
+        "id": "c40fb88bf4b84bf1",
+        "type": "ui-template",
+        "z": "b845fb6298a4e637",
+        "group": "",
+        "page": "195bb746fcc62daf",
+        "ui": "",
+        "name": "CSS Template",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "head": "",
+        "format": "<style>\n    /* Very important for the UI Decoration */\n    /* Need this to overwrite the Dashboard 2.0 constraints */\n\n    /* Forces contents and grid to the middle */\n    .v-main, \n    .v-container, \n    .nrdb-ui-view, \n    .v-row, \n    .v-col {\n        display: flex !important;\n        flex-direction: column !important;\n        align-items: center !important;\n        justify-content: flex-start !important;\n        width: 100% !important;\n        max-width: 100vw !important;\n        margin: 0 !important;\n        padding: 0 !important;\n        left: 0 !important;\n    }\n\n    /* Align header title in the middle */\n    header.v-toolbar {\n        left: 0 !important;\n        width: 100vw !important;\n    }\n\n    header .v-toolbar__prepend,\n    header .v-toolbar__append,\n    header .v-navigation-drawer__toggle {\n        display: none !important;\n    }\n\n    header .v-toolbar__content {\n        display: flex !important;\n        justify-content: center !important;\n        align-items: center !important;\n        width: 100% !important;\n        padding: 0 !important;\n    }\n\n    header .v-toolbar-title {\n        flex: 0 1 auto !important;\n        margin: 0 auto !important;\n        text-align: center !important;\n        font-family: 'Georgia', serif !important;\n        color: #FFD700 !important;\n        font-weight: bold !important;\n        font-size: 1.8rem !important;\n        width: fit-content !important;\n    }\n\n    /* Push contents a bit further down the header for visibility */\n    .v-main {\n        padding-top: 60px !important; \n    }\n\n    /* Centering the groups in the middle */\n    .nrdb-ui-group {\n        margin: 20px auto !important; \n        max-width: 1000px !important;\n        min-width: 900px !important;  \n        flex-shrink: 0 !important;\n        width: 90% !important;\n        display: block !important;\n    }\n\n    /* Group titles */\n    .nrdb-ui-group-title,\n    .nrdb-ui-group .v-card-title {\n        color: #8702c5 !important;\n        font-family: 'Georgia', serif !important;\n        font-weight: 900 !important;\n        text-transform: uppercase !important;\n        justify-content: center !important;\n        display: flex !important;\n        width: 100% !important;\n        text-align: center !important;\n    }\n\n    /* Align switches, text, and icons in the middle inside the boxes */\n    .nrdb-ui-widget {\n        display: flex !important;\n        justify-content: center !important;\n        width: 100% !important;\n    }\n\n    /* Hide CSS template space to prevent it from taking space */\n    .nrdb-ui-widget:has(style) {\n        display: none !important;\n        height: 0 !important;\n        margin: 0 !important;\n    }\n\n    /* Contents in groups */\n    .nrdb-ui-widget label, \n    .nrdb-ui-widget .v-label {\n        color: #000000 !important;\n        font-family: 'Georgia', serif !important;\n        font-weight: bold !important;\n        font-size: 1.1rem !important;\n        opacity: 1 !important;\n        \n        /* Forces LED light and switch to be away from the text*/\n        min-width: 200px !important;  \n        margin-right: 40px !important;\n        text-align: right !important; \n    }\n\n    /* Separation fix - container Level */\n    .v-selection-control {\n        justify-content: center !important;\n        width: 100% !important;\n        display: flex !important;\n        flex-direction: row !important;\n        gap: 10px !important; \n    }\n    \n</style>",
+        "storeOutMessages": true,
+        "passthru": true,
+        "resendOnRefresh": true,
+        "templateScope": "widget:page",
+        "className": "",
+        "x": 480,
+        "y": 720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f62f7e894a1c544a",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-dashboard": "3.6.6",
+            "@flowfuse/node-red-dashboard": "1.29.0",
+            "@flowfuse/node-red-dashboard-2-ui-led": "1.1.0"
+        }
+    }
+]
