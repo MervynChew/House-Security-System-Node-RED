@@ -9,12 +9,15 @@ import threading
 NODE_RED_URL = "http://127.0.0.1:1880/motion" # Node-Red URL, some devices may need to change this to their local IP
 VIDEO_SOURCE = "Footage/delivery.mp4" 
 CONFIDENCE_THRESHOLD = 0.5
-LOITER_LIMIT = 2.0 
+LOITER_LIMIT_DANGER = 2.0 
+LOITER_LIMIT_ALERT = 2.0  
 
 # --- MEMORY ---
-zone_timers = {}    # Stopwatch for current loitering
-track_states = {}   # Remembers "CRITICAL" vs "ALERT" to stop spam
-last_durations = {} # <--- NEW: Remembers the final time when they leave Danger zone
+danger_zone_timers = {}    # Stopwatch for current loitering in Danger Zone
+alert_zone_timers = {}     # Stopwatch for current loitering in Alert Zone
+track_states = {}          # Remembers "CRITICAL" vs "ALERT" to stop spam
+danger_total_time = {}     # Total accumulated time in Danger Zone
+alert_total_time = {}      # Total accumulated time in Alert Zone
 
 model = YOLO("yolov8n.pt")
 cap = cv2.VideoCapture(VIDEO_SOURCE)
@@ -96,23 +99,25 @@ while True:
                 status_color = (0, 0, 255) # Red
                 box_color = (0, 0, 255)
 
-                if track_id not in zone_timers:
-                    zone_timers[track_id] = time.time()
+                if track_id not in danger_zone_timers:
+                    danger_zone_timers[track_id] = time.time()
                 
                 # Calculate Duration
-                elapsed_time = time.time() - zone_timers[track_id]
+                danger_elapsed_time = time.time() - danger_zone_timers[track_id]
                 
-                # Save this duration instantly (So we don't lose it if they step out)
-                last_durations[track_id] = elapsed_time
-
-                if elapsed_time > LOITER_LIMIT:
-                    duration_str = f"{elapsed_time:.1f} second(s)"
-                    status = f"Loitering in front of main door for {duration_str}"
+                if danger_elapsed_time > LOITER_LIMIT_DANGER:
+                    duration_str = f"{danger_elapsed_time:.1f} second(s)"
+                    status = f"Loitering in front of house for {duration_str}"
 
                     if last_sent_mode != "CRITICAL":
                         payload = {"status": "CRITICAL Mode", "msg": status}
                         send_request(payload)
                         track_states[track_id] = "CRITICAL"
+                
+                # Save in alert zone duration instantly (So we don't lose it if they step out)
+                if track_id in alert_zone_timers:
+                    alert_total_time[track_id] = alert_total_time.get(track_id, 0) + (time.time() - alert_zone_timers[track_id])
+                    del alert_zone_timers[track_id]
 
             # --- ALERT ZONE ---
             elif in_alert:
@@ -120,31 +125,61 @@ while True:
                 status_color = (0, 255, 255) # Yellow
                 box_color = (0, 255, 255)
 
-                if last_sent_mode != "ALERT" and last_sent_mode != "CRITICAL":
-                    payload = {"status": "ALERT Mode", "msg": status}
-                    send_request(payload)
-                    track_states[track_id] = "ALERT"
+                # Start Alert Timer
+                if track_id not in alert_zone_timers:
+                    alert_zone_timers[track_id] = time.time()
+                
+                # Calculate Duration
+                alert_elapsed_time = time.time() - alert_zone_timers[track_id]
+                
+                if alert_elapsed_time > LOITER_LIMIT_ALERT:
+                    duration_str = f"{alert_elapsed_time:.1f} second(s)"
+                    status = f"Loitering in alert zone for {duration_str}"
 
-                # If they just left Danger Zone, the timer is deleted here.
-                # But we already saved the time in 'last_durations' above!
-                if track_id in zone_timers: del zone_timers[track_id]
+                    # Only send "ALERT" event when someone moves from SAFE to ALERT, and from CRITICAL to ALERT
+                    if last_sent_mode != "ALERT":
+                        # Only play audio if moving from SAFE to ALERT
+                        should_play = 1 if last_sent_mode != "CRITICAL" else 0
+        
+                        payload = {
+                            "status": "ALERT Mode", 
+                            "play_audio": should_play,
+                            "msg": status,
+                        }
+                        send_request(payload)
+                        # Update state
+                        track_states[track_id] = "ALERT"
+
+                # Save in danger zone duration instantly (So we don't lose it if they step out)
+                if track_id in danger_zone_timers:
+                    danger_total_time[track_id] = danger_total_time.get(track_id, 0) + (time.time() - danger_zone_timers[track_id])
+                    del danger_zone_timers[track_id]
 
             # --- SAFE ZONE (Exit) ---
             else:
                 # If they were previously dangerous/alert, send final report
                 if last_sent_mode in ["ALERT", "CRITICAL"]:
                     
-                    # RETRIEVE SAVED DURATION (Fix for 0.0s)
-                    final_time = last_durations.get(track_id, 0.0)
+                    final_danger_time = danger_total_time.get(track_id, 0) + (time.time() - danger_zone_timers.get(track_id, time.time()))
+                    final_alert_time = alert_total_time.get(track_id, 0) + (time.time() - alert_zone_timers.get(track_id, time.time()))
                     
-                    msg = f"Target left zone. Total duration loitering in front of house: {final_time:.1f} second(s)"
-                    payload = {"status": "SAFE Mode", "msg": msg}
+                    # Get type of zone someone is in based on last sent mode
+                    zone_name = "alert zone" if last_sent_mode == "ALERT" else "danger zone"
+
+                    # Newline for each duration
+                    msg1 = f"Target left.<br>"
+                    msg2 = f"Total duration loitering in front of house: {max(0, final_danger_time):.1f} second(s)<br>"
+                    msg3 = f"Total duration loitering in alert zone: {max(0, final_alert_time):.1f} second(s)"
+                    payload = {"status": "SAFE Mode", "msg": msg1 + msg2 + msg3}
                     send_request(payload)
                     
                     track_states[track_id] = "SAFE"
+                    # Reset total times for alert and danger zones
+                    danger_total_time[track_id] = 0
+                    alert_total_time[track_id] = 0
 
-                if track_id in zone_timers: del zone_timers[track_id]
-
+                if track_id in danger_zone_timers: del danger_zone_timers[track_id]
+                if track_id in alert_zone_timers: del alert_zone_timers[track_id]
 
             cv2.rectangle(frame, (x1, y1), (x2, y2), box_color, 2)
             cv2.circle(frame, (feet_x, feet_y), 5, (255, 255, 255), -1)
@@ -155,8 +190,7 @@ while True:
     for track_id in list(track_states.keys()):
         if track_id not in current_ids:
             del track_states[track_id]
-            if track_id in zone_timers: del zone_timers[track_id]
-            if track_id in last_durations: del last_durations[track_id]
+            if track_id in danger_zone_timers: del danger_zone_timers[track_id]
 
     cv2.imshow("Top-Bottom Zone Split", frame)
     if cv2.waitKey(1) & 0xFF == ord('q'): break

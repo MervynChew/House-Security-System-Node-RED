@@ -217,7 +217,7 @@
         "upload": false,
         "skipBodyParsing": false,
         "swaggerDoc": "",
-        "x": 530,
+        "x": 470,
         "y": 620,
         "wires": [
             [
@@ -230,14 +230,14 @@
         "type": "function",
         "z": "b845fb6298a4e637",
         "name": "Process motion detection message",
-        "func": "let p = msg.payload;\n\nmsg.payload = {\n    status: p.status,\n    message: (p.msg)\n};\n\nreturn msg;\n",
+        "func": "let p = msg.payload;\n\nmsg.payload = {\n    status: p.status,\n    message: (p.msg)\n};\n\n// For Alert Mode payloads\n// To trigger AI warning audio only for SAfE to ALERT Mode\nif (p.hasOwnProperty('play_audio')) {\n    msg.payload.play_audio = p.play_audio;\n}\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 840,
+        "x": 820,
         "y": 620,
         "wires": [
             [
@@ -335,9 +335,9 @@
         "wires": [
             [
                 "e3ac4e6976d7a5c0",
-                "a72d16252fcba37a",
                 "a1d416e44d2cc7af",
-                "42f39e1910baadce"
+                "42f39e1910baadce",
+                "18c4d448067ef1e1"
             ]
         ]
     },
@@ -358,13 +358,13 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 1390,
-        "y": 1060,
+        "x": 1450,
+        "y": 800,
         "wires": [
             [
-                "ddc9a26717c4ea42",
                 "7d1f26acf191d3b7",
-                "42f39e1910baadce"
+                "42f39e1910baadce",
+                "7465b478356bc4a4"
             ]
         ]
     },
@@ -389,9 +389,9 @@
         "y": 620,
         "wires": [
             [
-                "ab33ddafe13d79e1",
                 "3f3c11b1e0a4feea",
-                "42f39e1910baadce"
+                "42f39e1910baadce",
+                "afcd3b4a530c0157"
             ]
         ]
     },
@@ -402,12 +402,12 @@
         "command": "powershell -WindowStyle Hidden -Command \"Add-Type -AssemblyName System.Speech; (New-Object System.Speech.Synthesis.SpeechSynthesizer).Speak('Warning. Intruder detected. Please leave immediately.')\"",
         "addpay": "",
         "append": "",
-        "useSpawn": "true",
+        "useSpawn": "false",
         "timer": "",
         "winHide": false,
         "oldrc": false,
         "name": "Audio: Intruder Warning featuring AI Generated Voice",
-        "x": 1900,
+        "x": 2160,
         "y": 620,
         "wires": [
             [],
@@ -426,10 +426,11 @@
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "payload",
+        "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 2360,
+        "x": 2660,
         "y": 620,
         "wires": []
     },
@@ -438,14 +439,14 @@
         "type": "function",
         "z": "b845fb6298a4e637",
         "name": "Messenger",
-        "func": "// CONFIGURATION\nvar apikey = \"Moaq8SlWi1vfhUjd\"; \n\n// FIX: Use .message (based on your debug output) OR .msg as a backup\nvar textToSend = (msg.payload.message || \"Security Update\");\n\n// Encode text\nvar encodedMessage = encodeURIComponent(textToSend);\n\n// Construct URL\nmsg.url = \"https://api.callmebot.com/facebook/send.php?source=node-red&apikey=\" + apikey + \"&text=\" + encodedMessage;\n\nmsg.payload = {};\n\nreturn msg;",
+        "func": "// CONFIGURATION\nvar apikey = \"Moaq8SlWi1vfhUjd\"; \n\n// FIX: Use .message (based on your debug output) OR .msg as a backup\nvar textToSend = (msg.payload.message || msg.payload.msg || \"Security Update\");\n\n// Encode text\nvar encodedMessage = encodeURIComponent(textToSend);\n\n// Construct URL\nmsg.url = \"https://api.callmebot.com/facebook/send.php?source=node-red&apikey=\" + apikey + \"&text=\" + encodedMessage;\n\nmsg.payload = {};\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1810,
+        "x": 2030,
         "y": 260,
         "wires": [
             [
@@ -465,7 +466,7 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 2580,
+        "x": 2800,
         "y": 260,
         "wires": []
     },
@@ -485,7 +486,7 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 2330,
+        "x": 2550,
         "y": 260,
         "wires": [
             [
@@ -510,7 +511,7 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 2060,
+        "x": 2280,
         "y": 260,
         "wires": [
             [
@@ -523,15 +524,15 @@
         "type": "function",
         "z": "b845fb6298a4e637",
         "name": "Messenger",
-        "func": "// CONFIGURATION\nvar apikey = \"Moaq8SlWi1vfhUjd\"; \n\n// FIX: Use .message (based on your debug output) OR .msg as a backup\nvar textToSend = (msg.payload.message || \"Security Update\");\n\n// Encode text\nvar encodedMessage = encodeURIComponent(textToSend);\n\n// Construct URL\nmsg.url = \"https://api.callmebot.com/facebook/send.php?source=node-red&apikey=\" + apikey + \"&text=\" + encodedMessage;\n\nmsg.payload = {};\n\nreturn msg;",
+        "func": "// CONFIGURATION\nvar apikey = \"Moaq8SlWi1vfhUjd\"; \n\n// FIX: Use .message (based on your debug output) OR .msg as a backup\nvar textToSend = (msg.payload.message || msg.payload.msg || \"Security Update\");\n\n// Replace commas with newlines and handle newlines\nif (typeof textToSend === 'string') {\n    textToSend = textToSend.replace(/<br\\s*\\/?>/gi, \"\\n\");\n}\n\n// Encode text\nvar encodedMessage = encodeURIComponent(textToSend);\n\n// Construct URL\nmsg.url = \"https://api.callmebot.com/facebook/send.php?source=node-red&apikey=\" + apikey + \"&text=\" + encodedMessage;\n\nmsg.payload = {};\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1770,
-        "y": 980,
+        "x": 2030,
+        "y": 940,
         "wires": [
             [
                 "21272315e019bf93"
@@ -550,8 +551,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 2540,
-        "y": 980,
+        "x": 2820,
+        "y": 1000,
         "wires": []
     },
     {
@@ -570,8 +571,8 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 2290,
-        "y": 980,
+        "x": 2570,
+        "y": 1000,
         "wires": [
             [
                 "74e4ddfe534b59a2"
@@ -595,8 +596,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 2020,
-        "y": 980,
+        "x": 2300,
+        "y": 1000,
         "wires": [
             [
                 "d2f329eabd97eac8"
@@ -636,8 +637,8 @@
         "shape": "circle",
         "showBorder": false,
         "showGlow": true,
-        "x": 2330,
-        "y": 520,
+        "x": 2470,
+        "y": 500,
         "wires": []
     },
     {
@@ -687,7 +688,7 @@
         "to": "",
         "reg": false,
         "x": 1780,
-        "y": 1060,
+        "y": 1000,
         "wires": [
             [
                 "0bfc86611ae8a5c2"
@@ -706,8 +707,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1160,
-        "y": 1480,
+        "x": 860,
+        "y": 1460,
         "wires": [
             [
                 "e4261eadc3eed6ef"
@@ -740,7 +741,7 @@
         "id": "set_global_state",
         "type": "change",
         "z": "b845fb6298a4e637",
-        "name": "Store Armed State",
+        "name": "Store System State for Gatekeeper to Check",
         "rules": [
             {
                 "t": "set",
@@ -750,8 +751,8 @@
                 "tot": "msg"
             }
         ],
-        "x": 1650,
-        "y": 1540,
+        "x": 1470,
+        "y": 1520,
         "wires": [
             []
         ]
@@ -760,7 +761,7 @@
         "id": "8b489b5daba03346",
         "type": "inject",
         "z": "b845fb6298a4e637",
-        "name": "Auto Switch",
+        "name": "Auto Time Detection",
         "props": [
             {
                 "p": "payload"
@@ -773,8 +774,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 870,
-        "y": 1540,
+        "x": 540,
+        "y": 1500,
         "wires": [
             [
                 "scheduler_logic"
@@ -807,12 +808,12 @@
         "offvalueType": "bool",
         "officon": "",
         "offcolor": "",
-        "x": 1420,
-        "y": 1420,
+        "x": 1140,
+        "y": 1380,
         "wires": [
             [
                 "set_global_state",
-                "f75f760bb1e4647a"
+                "2d5d02692b81ce9a"
             ]
         ]
     },
@@ -838,8 +839,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1650,
-        "y": 1260,
+        "x": 1570,
+        "y": 1240,
         "wires": [
             [
                 "126207ae27d74e72"
@@ -861,6 +862,20 @@
                 "pt": "msg",
                 "to": "false",
                 "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "logStatus",
+                "pt": "msg",
+                "to": "ARMED Mode",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "logMessage",
+                "pt": "msg",
+                "to": "Security System Active",
+                "tot": "str"
             }
         ],
         "action": "",
@@ -868,11 +883,12 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1950,
-        "y": 1200,
+        "x": 1830,
+        "y": 1160,
         "wires": [
             [
-                "0bfc86611ae8a5c2"
+                "0bfc86611ae8a5c2",
+                "42f39e1910baadce"
             ]
         ]
     },
@@ -888,6 +904,20 @@
                 "pt": "msg",
                 "to": "null",
                 "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "logStatus",
+                "pt": "msg",
+                "to": "DISARMED Mode",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "logMessage",
+                "pt": "msg",
+                "to": "Security System Inactive",
+                "tot": "str"
             }
         ],
         "action": "",
@@ -895,11 +925,12 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1900,
-        "y": 1320,
+        "x": 1840,
+        "y": 1340,
         "wires": [
             [
-                "0bfc86611ae8a5c2"
+                "0bfc86611ae8a5c2",
+                "42f39e1910baadce"
             ]
         ]
     },
@@ -942,8 +973,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1100,
-        "y": 1300,
+        "x": 800,
+        "y": 1280,
         "wires": [
             [
                 "e4261eadc3eed6ef"
@@ -954,7 +985,7 @@
         "id": "bef56c8d2b3b0822",
         "type": "inject",
         "z": "b845fb6298a4e637",
-        "name": "Auto Switch (Loading Up Dashboard)",
+        "name": "Auto Time Detection",
         "props": [
             {
                 "p": "payload"
@@ -967,12 +998,12 @@
         "repeat": "",
         "crontab": "",
         "once": true,
-        "onceDelay": 0.1,
+        "onceDelay": "1",
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 690,
-        "y": 1180,
+        "x": 460,
+        "y": 1220,
         "wires": [
             [
                 "95defb3c6084b00f"
@@ -984,18 +1015,18 @@
         "type": "function",
         "z": "b845fb6298a4e637",
         "name": "Table Formatter",
-        "func": "let now = new Date();\nlet date = now.toLocaleDateString();\nlet time = now.toLocaleTimeString();\n\n// Get msg from python script\nlet eventDesc = msg.payload.message || \"Movement Detected\";\nlet status = msg.payload.status || \"Unknown\";\n\nlet newEntry = {\n    description: eventDesc,\n    date: date,   \n    start: time,\n    status: status\n};\n\n// History Management\nlet history = global.get(\"securityHistory\") || [];\nhistory.unshift(newEntry);\n\n// Only save and display the last 100 events\nif (history.length > 100) { history.pop(); }\nglobal.set(\"securityHistory\", history);\n\nmsg.payload = history;\nreturn msg;",
+        "func": "// Get status and event adn system switch states and python script payloads\nlet status = msg.logStatus || (msg.payload ? msg.payload.status : null);\nlet event = msg.logMessage || (msg.payload ? (msg.payload.message || msg.payload.msg || msg.payload.msg1 || msg.payload.msg2 || msg.payload.msg3) : null);\n\n// Handle newlines\nif (event && typeof event === 'string') {\n    // This turns \\n into <br> so the HTML table understands it\n    event = event.replace(/\\n/g, \"<br>\");\n}\n\n// If no data return nothing\nif (!status || !event) {\n    return null;\n}\n\n// Get history\nlet history = global.get(\"securityHistory\");\nif (!Array.isArray(history)) {\n    history = [];\n}\n\n// Prevent table from flickering\nif (event === global.get(\"lastTableDesc\") && (Date.now() - global.get(\"lastTableTime\")) < 2000) {\n    return null;\n}\nglobal.set(\"lastTableDesc\", event);\nglobal.set(\"lastTableTime\", Date.now());\n\n// Add events to table\nhistory.unshift({\n    description: event,\n    date: new Date().toLocaleDateString(),\n    start: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }),\n    status: status\n});\n\n// Limit to 50 events max, then pops old events\nif (history.length > 50) history.pop();\n\nglobal.set(\"securityHistory\", history);\nmsg.payload = history;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1660,
-        "y": 780,
+        "x": 2440,
+        "y": 840,
         "wires": [
             [
-                "5a7c42c843c5258e"
+                "10509aef7f9726a3"
             ]
         ]
     },
@@ -1006,22 +1037,22 @@
         "group": "1ec607290d5c2bd7",
         "page": "",
         "ui": "",
-        "name": "Activitiy Log Table",
+        "name": "Activitiy History Table",
         "order": 1,
         "width": 0,
         "height": 0,
         "head": "",
-        "format": "<div style=\"background: white; padding: 10px; border-radius: 8px; border: 1px solid #ddd; color: #333; min-width: 500px; width: 100%;\">\n    <div style=\"max-height: 600px; overflow-y: auto; overflow-x: hidden; border-bottom: 1px solid #eee;\">\n        <table style=\"width: 100%; border-collapse: collapse;\">\n            <thead style=\"position: sticky; top: 0; background: #f4f4f4; z-index: 1;\">\n                <tr style=\"text-align: left;\">\n                    <th style=\"padding: 15px; font-size: 1.1em; width: 40%;\">Event</th>\n                    <th style=\"padding: 7px; font-size: 1.1em;\">Date</th>\n                    <th style=\"padding: 7px; font-size: 1.1em;\">Time</th>\n                    <th style=\"padding: 10px; font-size: 1.1em;\">Status</th>\n                    <th style=\"padding: 7px;\"></th>\n                </tr>\n            </thead>\n            <tbody>\n                <tr v-for=\"(row, index) in msg.payload\" :key=\"index\" style=\"border-bottom: 1px solid #eee;\">\n                    <td style=\"padding: 15px; font-size: 1.1em;\">{{ row.description }}</td>\n                    <td style=\"padding: 10px; font-size: 1.1em; white-space: nowrap;\">{{ row.date }}</td>\n                    <td style=\"padding: 10px; font-size: 1.1em; white-space: nowrap;\">{{ row.start }}</td>\n                    <td style=\"padding: 6px;\">\n                        <span :style=\"{\n                            color: row.status.includes('CRITICAL') ? 'red' : \n                                   (row.status.includes('ALERT') ? 'orange' : 'green'),\n                            fontWeight: 'bold',\n                            fontSize: '1.1em'\n                        }\">\n                            {{ row.status }}\n                        </span>\n                    </td>\n                    <td style=\"padding: 6px; text-align: center;\">\n                        <button @click=\"send({payload: index, action: 'delete_row'})\" \n                                style=\"background: #ffeded; border: 1px solid #ffbcbc; color: #d11a2a; border-radius: 8px; cursor: pointer; padding: 8px 12px; font-weight: bold;\">\n                            Delete\n                        </button>\n                    </td>\n                </tr>\n            </tbody>\n        </table>\n    </div>\n    \n    <div style=\"margin-top: 15px; display: flex; justify-content: space-between; align-items: center;\">\n        <div style=\"font-size: 1.1em; color: #666;\">\n            Total Events: {{ msg.payload ? msg.payload.length : 0 }} / 100\n        </div>\n        \n        <div style=\"display: flex; gap: 10px;\">\n            <button @click=\"downloadHistory\" \n                    style=\"background: #4CAF50; color: white; border: none; border-radius: 8px; cursor: pointer; padding: 12px 20px; font-weight: bold;\">\n                Export CSV\n            </button>\n\n            <button @click=\"send({action: 'clear_all_logs'})\" \n                    style=\"background: #d11a2a; color: white; border: none; border-radius: 8px; cursor: pointer; padding: 12px 20px; font-weight: bold;\">\n                Clear All\n            </button>\n        </div>\n    </div>\n</div>\n\n<script>\n    export default {\n        methods: {\n            downloadHistory() {\n                const data = this.msg.payload;\n                if (!data || data.length === 0) {\n                    alert(\"No history to export\");\n                    return;\n                }\n                \n                let csv = \"Date,Time,Event,Status\\n\";\n                data.forEach(r => {\n                    // Clean descriptions of any quotes to prevent CSV breaking\n                    const cleanDesc = r.description.replace(/\"/g, '\"\"');\n                    csv += `\"${r.date}\",\"${r.start}\",\"${cleanDesc}\",\"${r.status}\"\\n`;\n                });\n\n                const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });\n                const url = window.URL.createObjectURL(blob);\n                const link = document.createElement('a');\n                link.href = url;\n                link.setAttribute('download', `security_history_${new Date().toLocaleDateString().replace(/\\//g, '-')}.csv`);\n                document.body.appendChild(link);\n                link.click();\n                document.body.removeChild(link);\n                window.URL.revokeObjectURL(url);\n            }\n        }\n    }\n</script>",
+        "format": "<div style=\"background: white; padding: 10px; border-radius: 8px; border: 1px solid #ddd; color: #333; min-width: 500px; width: 100%;\">\n    <div style=\"max-height: 600px; overflow-y: auto; overflow-x: hidden; border-bottom: 1px solid #eee;\">\n        <table style=\"width: 100%; border-collapse: collapse;\">\n            <thead style=\"position: sticky; top: 0; background: #f4f4f4; z-index: 1;\">\n                <tr style=\"text-align: left;\">\n                    <th style=\"padding: 18px; font-size: 1.1em; width: 40%;\">Event</th>\n                    <th style=\"padding: 10px; font-size: 1.1em;\">Date</th>\n                    <th style=\"padding: 10px; font-size: 1.1em;\">Time</th>\n                    <th style=\"padding: 8px; font-size: 1.1em;\">Status</th>\n                    <th style=\"padding: 8px;\"></th>\n                </tr>\n            </thead>\n            <tbody>\n                <tr v-for=\"(row, index) in msg.payload\" :key=\"index\" style=\"border-bottom: 1px solid #eee;\">\n                    <td style=\"padding: 15px; font-size: 1.1em; white-space: pre-line;\">\n                        {{ formatDescription(row.description) }}\n                    </td>\n                    <td style=\"padding: 10px; font-size: 1.1em; white-space: nowrap;\">{{ row.date }}</td>\n                    <td style=\"padding: 10px; font-size: 1.1em; white-space: nowrap;\">{{ row.start }}</td>\n                    <td style=\"padding: 6px;\">\n                        <span :style=\"{\n                            color: row.status.includes('CRITICAL') ? 'red' : \n                                (row.status.includes('ALERT') ? '#E67E22' : \n                                (row.status.includes('SAFE') ? 'green' : '#0000FF')),\n                            fontWeight: 'bold',\n                            fontSize: '1.1em'\n                        }\">\n                            {{ row.status }}\n                        </span>\n                    </td>\n                    <td style=\"padding: 6px; text-align: center;\">\n                        <button @click=\"send({payload: index, action: 'delete_row'})\" \n                                style=\"background: #ffeded; border: 1px solid #ffbcbc; color: #d11a2a; border-radius: 8px; cursor: pointer; padding: 8px 12px; font-weight: bold;\">\n                            Delete\n                        </button>\n                    </td>\n                </tr>\n            </tbody>\n        </table>\n    </div>\n    \n    <div style=\"margin-top: 15px; display: flex; justify-content: space-between; align-items: center;\">\n        <div style=\"font-size: 1.1em; color: #666;\">\n            Total Events: {{ msg.payload ? msg.payload.length : 0 }} / 50\n        </div>\n        \n        <div style=\"display: flex; gap: 10px;\">\n            <button @click=\"downloadHistory\" \n                    style=\"background: #4CAF50; color: white; border: none; border-radius: 8px; cursor: pointer; padding: 12px 20px; font-weight: bold;\">\n                Export CSV\n            </button>\n\n            <button @click=\"send({action: 'clear_all_logs'})\" \n                    style=\"background: #d11a2a; color: white; border: none; border-radius: 8px; cursor: pointer; padding: 12px 20px; font-weight: bold;\">\n                Clear All\n            </button>\n        </div>\n    </div>\n</div>\n\n<script>\n    export default {\n        methods: {\n            // Change <br> to newlines\n            formatDescription(desc) {\n                if (!desc) return '';\n                // Convert <br> tags to newlines for display\n                return desc.replace(/<br\\s*\\/?>/gi, '\\n');\n            },\n            \n            downloadHistory() {\n                const data = this.msg.payload;\n                if (!data || data.length === 0) {\n                    alert(\"No history to export\");\n                    return;\n                }\n                \n                let csv = \"Date,Time,Event,Status\\n\";\n                data.forEach(r => {\n                    // Convert <br> tags to newlines for CSV export\n                    let cleanDesc = r.description || '';\n                    \n                    // Convert <br> tags to newline characters\n                    if (typeof cleanDesc === 'string') {\n                        cleanDesc = cleanDesc.replace(/<br\\s*\\/?>/gi, '\\n');\n                        // Remove any remaining HTML tags\n                        cleanDesc = cleanDesc.replace(/<\\/?[^>]+(>|$)/g, \"\");\n                    }\n                    \n                    // Escape quotes for CSV\n                    cleanDesc = cleanDesc.replace(/\"/g, '\"\"');\n                    \n                    // Wrap events and the features in quotes since it contains newlines\n                    csv += `\"${r.date}\",\"${r.start}\",\"${cleanDesc}\",\"${r.status}\"\\n`;\n                });\n\n                const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });\n                const url = window.URL.createObjectURL(blob);\n                const link = document.createElement('a');\n                link.href = url;\n                link.setAttribute('download', `security_history_${new Date().toLocaleDateString().replace(/\\//g, '-')}.csv`);\n                document.body.appendChild(link);\n                link.click();\n                document.body.removeChild(link);\n                window.URL.revokeObjectURL(url);\n            }\n        }\n    }\n</script>",
         "storeOutMessages": true,
         "passthru": true,
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 1890,
+        "x": 2820,
         "y": 700,
         "wires": [
             [
-                "687466f093decb1d"
+                "1b51b9ccf50ad436"
             ]
         ]
     },
@@ -1037,11 +1068,11 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1800,
-        "y": 880,
+        "x": 2820,
+        "y": 900,
         "wires": [
             [
-                "5a7c42c843c5258e"
+                "e9046382eea52f23"
             ]
         ]
     },
@@ -1063,14 +1094,189 @@
         "resendOnRefresh": true,
         "templateScope": "widget:page",
         "className": "",
-        "x": 480,
+        "x": 440,
         "y": 720,
         "wires": [
             []
         ]
     },
     {
-        "id": "f62f7e894a1c544a",
+        "id": "2d5d02692b81ce9a",
+        "type": "delay",
+        "z": "b845fb6298a4e637",
+        "name": "Delay (1 msg / 1 sec)",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1340,
+        "y": 1240,
+        "wires": [
+            [
+                "f75f760bb1e4647a"
+            ]
+        ]
+    },
+    {
+        "id": "10509aef7f9726a3",
+        "type": "delay",
+        "z": "b845fb6298a4e637",
+        "name": "Delay (1msg / 1 second)",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2490,
+        "y": 700,
+        "wires": [
+            [
+                "5a7c42c843c5258e"
+            ]
+        ]
+    },
+    {
+        "id": "7465b478356bc4a4",
+        "type": "delay",
+        "z": "b845fb6298a4e637",
+        "name": "Delay (1 msg / 1 sec)",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1740,
+        "y": 880,
+        "wires": [
+            [
+                "ddc9a26717c4ea42"
+            ]
+        ]
+    },
+    {
+        "id": "18c4d448067ef1e1",
+        "type": "delay",
+        "z": "b845fb6298a4e637",
+        "name": "Delay (1 msg / 1 sec)",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1760,
+        "y": 260,
+        "wires": [
+            [
+                "a72d16252fcba37a"
+            ]
+        ]
+    },
+    {
+        "id": "1b51b9ccf50ad436",
+        "type": "delay",
+        "z": "b845fb6298a4e637",
+        "name": "Delay (1msg / 1 second)",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 3110,
+        "y": 700,
+        "wires": [
+            [
+                "687466f093decb1d"
+            ]
+        ]
+    },
+    {
+        "id": "e9046382eea52f23",
+        "type": "delay",
+        "z": "b845fb6298a4e637",
+        "name": "Delay (1msg / 1 second)",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 3110,
+        "y": 900,
+        "wires": [
+            [
+                "5a7c42c843c5258e"
+            ]
+        ]
+    },
+    {
+        "id": "afcd3b4a530c0157",
+        "type": "switch",
+        "z": "b845fb6298a4e637",
+        "name": "Play Audio or Not",
+        "property": "payload.play_audio",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1670,
+        "y": 620,
+        "wires": [
+            [
+                "ab33ddafe13d79e1"
+            ]
+        ]
+    },
+    {
+        "id": "71f711d7c0f9f414",
         "type": "global-config",
         "env": [],
         "modules": {
