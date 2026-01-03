@@ -3,16 +3,16 @@
 2. detect.py is the old version
 3. yolo.py will use content in the Footage for audios and videos
 
-# How to run the Program
-1. cd to Assignment 2
-2. type inside the command prompt: python yolo.py
-3. A video is activated and can refer to the node-RED
-4. Audio will be triggered and the console will show the detection result
+# Setup before Running Python Script
+1. Change Node-RED URL in yolo.py (Line  9), some devices use http://127.0.0.1:1880/motion, some use http://localhost:1880/motion.
+2. Get API Key from https://m.me/api.callmebot, type "create apikey" with the chatbot, then copy and change the API key in JSON file (Line 442 and Line 527) in "Flow" folder.
+3. Now you are able to receive notifications on your messenger.
+4. Change directory for Alarm.wav in JSON file (Line 282).
+5. Choose Clipboard on Node-RED and import the JSON file in "Flow" folder.
 
-# Node-RED
-1. In the folder 'Flow', there is .json file which can be imported to node-RED to work on it.
-2. When imported, choose Clipboard
-3. After done the part, upload the new file with proper naming.
-4. When edit the file, replace the new file exported from the new version of flow in node-RED
-5. If it is from different person in charge, then use the different file.
-6. Otherwise, use the same file unless neccessary.
+# Run Python Script
+1. Ensure Node-RED is open on the computer with the JSON file.
+2. Type inside the command prompt or terminal: python yolo.py
+3. A video is activated and can refer to the Node-RED.
+4. Console will show the detection result.
+5. Audio, house light changes, messenger notifications and history logs recording will be triggered.
