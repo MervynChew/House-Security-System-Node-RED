@@ -279,7 +279,7 @@
         "id": "e3ac4e6976d7a5c0",
         "type": "exec",
         "z": "b845fb6298a4e637",
-        "command": "cmd /c start \"\" /min powershell -c \"(New-Object Media.SoundPlayer 'C:\\Users\\Admin\\OneDrive\\Desktop\\A_Y3S1\\CPT316\\NodeRed_Code\\House-Security-System-Node-RED\\Footage\\Alarm.wav').PlaySync();\"",
+        "command": "cmd /c start \"\" /min powershell -c \"(New-Object Media.SoundPlayer 'C:\\Users\\Admin\\OneDrive\\Desktop\\A_Y3S1\\CPT316\\House-Security-System-Node-RED\\Footage\\Alarm.wav').PlaySync();\"",
         "addpay": "",
         "append": "",
         "useSpawn": "false",
